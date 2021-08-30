@@ -94,3 +94,5 @@ UserManager{users=[User{firstName='dsf', lastName='dsfsd', email='sdfs@.fds', ro
 UserManager{users=[User{firstName='dsfs', lastName='sdff', email='sdfsd@.dfs', roles={1=ADMIN}, phoneList=null}]}
 
 UserManager{users=[User{firstName='fdsfsd', lastName='dsfs', email='sdfs@.fds', roles=null, phoneList=[+375447719392]}]}
+
+UserManager{users=[User{firstName='dsfsd', lastName='sdf', email='sdfs@.fds', roles=null, phoneList=[+375447719392]}]}

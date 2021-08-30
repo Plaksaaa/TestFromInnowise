@@ -23,11 +23,11 @@ public class Menu {
                     manager.showUsers();
                     break;
                 case DELETE_USER_BY_INDEX:
-                    System.out.println("Введите индекс пользователя которого хотите удалить");
+                    System.out.println("Enter a user index to delete");
 //                    users.remove(scanner.nextInt());
                     break;
                 case FIND_USER:
-                    System.out.println("Введите имя и фамилию пользователя");
+                    System.out.println("Enter a user first name and a user last name");
 //                    findUser(scanner.nextLine(), scanner.nextLine());
                     break;
                 case EXIT:

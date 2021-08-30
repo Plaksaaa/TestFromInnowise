@@ -1,9 +1,7 @@
 package com.innowise.builder;
 
 import com.innowise.entity.NewRole;
-import com.innowise.entity.Role;
 import com.innowise.entity.User;
-import com.innowise.exeptions.RoleExeption;
 import com.innowise.manager.Validator;
 
 import java.util.*;
@@ -24,8 +22,7 @@ public class UserConsoleReader {
 
         builder.setEmail(readEmail());
 
-
-//        builder.setRoleMap(readRoleMap());
+        builder.setRoleMap(readRoleMapp());
 
         builder.setPhoneList(readPhone());
 

@@ -1,6 +1,5 @@
 package com.innowise.manager;
 
-import com.innowise.entity.Role;
 import com.innowise.entity.User;
 
 import java.util.ArrayList;

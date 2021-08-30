@@ -2,8 +2,8 @@ package com.innowise.entity;
 
 import com.innowise.exeptions.RoleExeption;
 
-public enum Role {
-    USER(1),
+/*public enum NewRole {
+    *//*USER(1),
     CUSTOMER(2),
     ADMIN(3),
     PROVIDER(4),
@@ -26,6 +26,6 @@ public enum Role {
             }
         }
         throw new RoleExeption(String.format("Not found role with code: %s.", code));
-    }
+    }*//*
 
-}
+}*/
