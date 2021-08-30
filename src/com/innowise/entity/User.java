@@ -1,16 +1,15 @@
 package com.innowise.entity;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private Role firstRole;
-    private Role secondRole;
-    private String firstPhoneNumber;
-    private String secondPhoneNumber;
-    private String thirdPhoneNumber;
+    private Map<Integer, Role> roles;
+    private List<String> phoneList;
 
     private User() {
     }
@@ -27,24 +26,12 @@ public class User {
         return email;
     }
 
-    public Role getFirstRole() {
-        return firstRole;
+    public Map<Integer, Role> getRoles() {
+        return roles;
     }
 
-    public Role getSecondRole() {
-        return secondRole;
-    }
-
-    public String getFirstPhoneNumber() {
-        return firstPhoneNumber;
-    }
-
-    public String getSecondPhoneNumber() {
-        return secondPhoneNumber;
-    }
-
-    public String getThirdPhoneNumber() {
-        return thirdPhoneNumber;
+    public List<String> getPhoneList() {
+        return phoneList;
     }
 
     public static Builder newBuilder() {
@@ -74,32 +61,14 @@ public class User {
             return this;
         }
 
-        public Builder setFirstRole(Role firstRole) {
-            User.this.firstRole = firstRole;
+        public Builder setRoleMap(Map<Integer, Role> roles) {
+            User.this.roles = roles;
 
             return this;
         }
 
-        public Builder setSecondRole(Role secondRole) {
-            User.this.secondRole = secondRole;
-
-            return this;
-        }
-
-        public Builder setFirstPhoneNumber(String firstPhoneNumber) {
-            User.this.firstPhoneNumber = firstPhoneNumber;
-
-            return this;
-        }
-
-        public Builder setSecondPhoneNumber(String secondPhoneNumber) {
-            User.this.secondPhoneNumber = secondPhoneNumber;
-
-            return this;
-        }
-
-        public Builder setThirdPhoneNumber(String thirdPhoneNumber) {
-            User.this.thirdPhoneNumber = thirdPhoneNumber;
+        public Builder setPhoneList(List<String> phoneList) {
+            User.this.phoneList = phoneList;
 
             return this;
         }
@@ -109,9 +78,6 @@ public class User {
         }
     }
 
-//    Так как email у всех разный могу не добавлять все в equals
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -120,10 +86,8 @@ public class User {
         return firstName.equals(user.firstName) &&
                lastName.equals(user.lastName) &&
                email.equals(user.email) &&
-               firstRole == user.firstRole &&
-               firstPhoneNumber.equals(user.firstPhoneNumber) &&
-               Objects.equals(secondPhoneNumber, user.secondPhoneNumber) &&
-               Objects.equals(thirdPhoneNumber, user.thirdPhoneNumber);
+               roles.equals(user.roles) &&
+               phoneList.equals(user.phoneList);
     }
 
     @Override
@@ -137,10 +101,8 @@ public class User {
                "firstName='" + firstName + '\'' +
                ", lastName='" + lastName + '\'' +
                ", email='" + email + '\'' +
-               ", role=" + firstRole +
-               ", firstPhoneNumber='" + firstPhoneNumber + '\'' +
-               ", secondPhoneNumber='" + secondPhoneNumber + '\'' +
-               ", thirdPhoneNumber='" + thirdPhoneNumber + '\'' +
+               ", roles=" + roles +
+               ", phoneList=" + phoneList +
                '}';
     }
 }

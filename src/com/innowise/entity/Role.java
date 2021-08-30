@@ -1,26 +1,25 @@
 package com.innowise.entity;
 
 import com.innowise.exeptions.RoleExeption;
-import com.innowise.menu.EnumMenu;
 
 public enum Role {
-    USER('u'),
-    CUSTOMER('c'),
-    ADMIN('a'),
-    PROVIDER('p'),
-    SUPER_ADMIN('s');
+    USER(1),
+    CUSTOMER(2),
+    ADMIN(3),
+    PROVIDER(4),
+    SUPER_ADMIN(5);
 
-    private final char code;
+    private final int code;
 
-    Role(char code) {
+    Role(int code) {
         this.code = code;
     }
 
-    public char getCode() {
+    public int getCode() {
         return code;
     }
 
-    public static Role findRoleByCode(char code) throws RoleExeption {
+    public static Role findRoleByCode(int code) throws RoleExeption {
         for (Role role : values()) {
             if (code == role.getCode()) {
                 return role;

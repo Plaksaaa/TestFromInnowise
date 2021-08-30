@@ -1,38 +1,34 @@
 package com.innowise.menu;
 
-import com.innowise.entity.User;
-import com.innowise.builder.UserBuilder;
+import com.innowise.builder.UserConsoleReader;
 import com.innowise.file.util.FileWriterUtil;
+import com.innowise.manager.UserManager;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import static com.innowise.manager.UserManager.findUser;
-import static com.innowise.manager.UserManager.users;
-
 public class Menu {
-
-    public static void menu() throws IOException {
-        var scanner = new Scanner(System.in);
+    public static void menu() {
+        UserConsoleReader reader = new UserConsoleReader();
+        UserManager manager = new UserManager();
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             printMenu();
             EnumMenu command = EnumMenu.values()[Integer.parseInt(scanner.nextLine().trim()) - 1];
             switch (command) {
                 case CREATE_USER:
-                    users.add(UserBuilder.createUser());
-                    FileWriterUtil.writeToFileEnd("Data/txt", users.toString());
+                    manager.addUser(reader.createUser());
+                    FileWriterUtil.writeToFileEnd("Data/txt", manager.toString());
                     break;
                 case PRINT_USERS:
-                    users.stream().forEach(System.out::println);
+                    manager.showUsers();
                     break;
                 case DELETE_USER_BY_INDEX:
                     System.out.println("Введите индекс пользователя которого хотите удалить");
-                    users.remove(scanner.nextInt());
+//                    users.remove(scanner.nextInt());
                     break;
                 case FIND_USER:
                     System.out.println("Введите имя и фамилию пользователя");
-                    findUser(scanner.nextLine(), scanner.nextLine());
+//                    findUser(scanner.nextLine(), scanner.nextLine());
                     break;
                 case EXIT:
                     return;
