@@ -1,6 +1,6 @@
 package com.innowise.menu;
 
-import com.innowise.builder.UserConsoleReader;
+import com.innowise.console_reader.UserConsoleReader;
 import com.innowise.file.util.FileWriterUtil;
 import com.innowise.manager.UserManager;
 
@@ -13,22 +13,28 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             printMenu();
-            EnumMenu command = EnumMenu.values()[Integer.parseInt(scanner.nextLine().trim()) - 1];
+            MenuCommandsEnum command = MenuCommandsEnum.values()[Integer.parseInt(scanner.nextLine().trim()) - 1];
             switch (command) {
                 case CREATE_USER:
                     manager.addUser(reader.createUser());
                     FileWriterUtil.writeToFileEnd("Data/txt", manager.toString());
-                    break;
+                    continue;
                 case PRINT_USERS:
                     manager.showUsers();
                     break;
-                case DELETE_USER_BY_INDEX:
-                    System.out.println("Enter a user index to delete");
-//                    users.remove(scanner.nextInt());
+                case DELETE_USER:
+                    System.out.println("Enter a User First Name and User Last Name to Delete: ");
+                    manager.deleteUser(scanner.nextLine(), scanner.nextLine());
                     break;
                 case FIND_USER:
-                    System.out.println("Enter a user first name and a user last name");
-//                    findUser(scanner.nextLine(), scanner.nextLine());
+                    System.out.println("Enter a User First Name and a User Last Name to Find: ");
+                    System.out.println(manager.findUser(scanner.nextLine(), scanner.nextLine()));
+                    break;
+                case EDIT_USER:
+                    System.out.println("Enter a User First Name and User Last Name to Edit: ");
+                    manager.deleteUser(scanner.nextLine(),scanner.nextLine());
+                    manager.addUser(reader.createUser());
+                    FileWriterUtil.writeToFileEnd("Data/txt", manager.toString());
                     break;
                 case EXIT:
                     return;
@@ -37,14 +43,16 @@ public class Menu {
             }
         }
     }
-    public static void printMenu(){
+
+    public static void printMenu() {
         System.out.println("""
-                    Hello From Menu 
-                    1) - Create User
-                    2) - Show All Users
-                    3) - Remove User By index
-                    4) - Find User By Firstname and LastName
-                    5) - Exit       
-                    """);
+                Hello From Menu 
+                1) - Create User
+                2) - Show All Users
+                3) - Remove User
+                4) - Find User
+                5) - Edit User
+                6) - Exit       
+                """);
     }
 }

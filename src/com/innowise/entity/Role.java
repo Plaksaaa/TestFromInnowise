@@ -1,9 +1,9 @@
 package com.innowise.entity;
 
-import com.innowise.exeptions.RoleExeption;
+import com.innowise.exceptions.RoleException;
 
-/*public enum NewRole {
-    *//*USER(1),
+public enum Role {
+    USER(1),
     CUSTOMER(2),
     ADMIN(3),
     PROVIDER(4),
@@ -19,13 +19,12 @@ import com.innowise.exeptions.RoleExeption;
         return code;
     }
 
-    public static Role findRoleByCode(int code) throws RoleExeption {
+    public static Role findRoleByCode(int code) throws RoleException {
         for (Role role : values()) {
-            if (code == role.getCode()) {
+            if (role.getCode() == code) {
                 return role;
             }
         }
-        throw new RoleExeption(String.format("Not found role with code: %s.", code));
-    }*//*
-
-}*/
+        throw new RoleException(String.format("Not found role with code: %s.", code));
+    }
+}

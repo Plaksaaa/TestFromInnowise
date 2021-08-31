@@ -5,17 +5,14 @@ import com.innowise.entity.User;
 import java.util.ArrayList;
 
 public class UserManager {
-    private ArrayList<User> users = new ArrayList<>();
+    private static ArrayList<User> users = new ArrayList<>();
 
     public void addUser(User user){
         users.add(user);
     }
 
     public void showUsers(){
-        for (User user:users) {
-            System.out.println(user);
-        }
-//        users.stream().forEach(user -> System.out.println());
+        users.forEach(System.out::println);
     }
 
     public User findUser(String firstName, String lastName) {
@@ -29,9 +26,8 @@ public class UserManager {
         return searchedUser;
     }
 
-    public void EditUser(String firstName, String lastName){
-        User.Builder builder = User.newBuilder();
-         findUser(firstName, lastName);
+    public void deleteUser(String firstName, String lastName){
+        users.remove(findUser(firstName, lastName));
     }
 
     @Override

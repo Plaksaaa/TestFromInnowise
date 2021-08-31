@@ -1,7 +1,5 @@
 package com.innowise.manager;
 
-import java.util.regex.Pattern;
-
 public class Validator {
 
     private Validator() {

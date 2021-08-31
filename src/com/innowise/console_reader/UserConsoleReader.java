@@ -1,7 +1,8 @@
-package com.innowise.builder;
+package com.innowise.console_reader;
 
-import com.innowise.entity.NewRole;
+import com.innowise.entity.Role;
 import com.innowise.entity.User;
+import com.innowise.exceptions.RoleException;
 import com.innowise.manager.Validator;
 
 import java.util.*;
@@ -22,7 +23,7 @@ public class UserConsoleReader {
 
         builder.setEmail(readEmail());
 
-        builder.setRoleMap(readRoleMapp());
+        builder.setRoleMap(readRoleMap());
 
         builder.setPhoneList(readPhone());
 
@@ -60,7 +61,7 @@ public class UserConsoleReader {
         return null;
     }
 
-    /*private Map<Integer, Role> readRoleMap() {
+    private Map<Integer, Role> readRoleMap() {
         Map<Integer, Role> roleMap = new HashMap<>();
         do {
             isValid = true;
@@ -73,14 +74,20 @@ public class UserConsoleReader {
                 System.out.println("Enter a Correct level!");
             }
 
-            System.out.println("Enter a Role: ");
+            System.out.println("""
+                    Enter a Role:
+                    1) - User
+                    2) - Customer
+                    3) - Admin
+                    4) - Provider
+                    5) - Super Admin
+                    """);
 
             Role role = null;
             try {
                 role = Role.findRoleByCode(scanner.nextInt());
                 if (level == 3) {
                     roleMap.put(3, Role.SUPER_ADMIN);
-//                    return roleMap;
                 } else if ((level == 1 && role.name().equalsIgnoreCase("Customer")) ||
                            (level == 1 && role.name().equalsIgnoreCase("User")) ||
                            (level == 2 && role.name().equalsIgnoreCase("Provider")) ||
@@ -90,15 +97,16 @@ public class UserConsoleReader {
                 } else {
                     roleMap.put(level, role);
                 }
-            } catch (RoleExeption roleExeption) {
+            } catch (RoleException roleExeption) {
                 roleExeption.printStackTrace();
             }
         } while (!isValid);
         return roleMap;
-    }*/
+    }
 
     private List<String> readPhone() {
         List<String> phones = new ArrayList<>();
+        var counter = 0;
         do {
             isValid = true;
             System.out.print("Enter a Phone Number: ");
@@ -111,10 +119,12 @@ public class UserConsoleReader {
                 } else {
                     phones.add(phone);
 
-                    System.out.println(" do");
-
-                    if (scanner.nextLine().equalsIgnoreCase("yes")){
-                        readPhone();
+                    System.out.println("Do You Want To Enter a Another Phone?\n" +
+                                       "Please Enter Yes or No");
+                    if (scanner.nextLine().equalsIgnoreCase("Yes") &&
+                        counter < 2) {
+                        counter++;
+                        isValid = false;
                     }
                 }
             } catch (NumberFormatException e) {
@@ -123,39 +133,5 @@ public class UserConsoleReader {
             }
         } while (!isValid);
         return phones;
-    }
-
-    private Map<Integer, NewRole> readRoleMapp() {
-        Map<Integer, NewRole> roleMap = new HashMap<>();
-        do {
-            isValid = true;
-            System.out.println("Enter a Level: ");
-
-            int level = scanner.nextShort();
-
-            if (level < 1 || level > 3) {
-                isValid = false;
-                System.out.println("Enter a Correct level!");
-            }
-
-            System.out.println("Enter a Role: ");
-
-            NewRole role = new NewRole(scanner.nextLine());
-
-                if (level == 3) {
-                    role.setRole("Super_Admin");
-                    roleMap.put(3, role);
-                    return roleMap;
-                } else if ((level == 1 && role.getRole().equalsIgnoreCase("Customer")) ||
-                           (level == 1 && role.getRole().equalsIgnoreCase("User")) ||
-                           (level == 2 && role.getRole().equalsIgnoreCase("Provider")) ||
-                           (level == 2 && role.getRole().equalsIgnoreCase("Admin"))) {
-                    isValid = false;
-                    System.out.println("Invalid Role. Try Again.");
-                } else {
-                    roleMap.put(level, role);
-                }
-        } while (!isValid);
-        return roleMap;
     }
 }

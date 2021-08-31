@@ -8,7 +8,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private Map<Integer, NewRole> roles;
+    private Map<Integer, Role> roles;
     private List<String> phoneList;
 
     private User() {
@@ -26,7 +26,7 @@ public class User {
         return email;
     }
 
-    public Map<Integer, NewRole> getRoles() {
+    public Map<Integer, Role> getRoles() {
         return roles;
     }
 
@@ -61,7 +61,7 @@ public class User {
             return this;
         }
 
-        public Builder setRoleMap(Map<Integer, NewRole> roles) {
+        public Builder setRoleMap(Map<Integer, Role> roles) {
             User.this.roles = roles;
 
             return this;

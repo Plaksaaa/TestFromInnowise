@@ -2,7 +2,7 @@ package com.innowise.entity;
 
 import java.util.Objects;
 
-public class NewRole {
+/*public class NewRole {
     private String role;
 
     public NewRole(String role) {
@@ -20,8 +20,8 @@ public class NewRole {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof NewRole)) return false;
-        NewRole newRole = (NewRole) o;
+        if (!(o instanceof Role)) return false;
+        Role newRole = (Role) o;
         return role.equals(newRole.role);
     }
 
@@ -36,4 +36,4 @@ public class NewRole {
                "role='" + role + '\'' +
                '}';
     }
-}
+}*/
