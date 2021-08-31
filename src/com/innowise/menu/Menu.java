@@ -1,6 +1,7 @@
 package com.innowise.menu;
 
 import com.innowise.console_reader.UserConsoleReader;
+import com.innowise.exceptions.MenuCommandsException;
 import com.innowise.file.util.FileWriterUtil;
 import com.innowise.manager.UserManager;
 
@@ -13,8 +14,9 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             printMenu();
-            MenuCommandsEnum command = MenuCommandsEnum.values()[Integer.parseInt(scanner.nextLine().trim()) - 1];
-            switch (command) {
+            try {
+                MenuCommandsEnum commandsEnum = MenuCommandsEnum.findActionByCode(scanner.nextInt());
+            switch (commandsEnum) {
                 case CREATE_USER:
                     manager.addUser(reader.createUser());
                     FileWriterUtil.writeToFileEnd("Data/txt", manager.toString());
@@ -40,6 +42,8 @@ public class Menu {
                     return;
                 default:
                     System.out.println("No such command!");
+            } } catch (MenuCommandsException e) {
+                e.printStackTrace();
             }
         }
     }
